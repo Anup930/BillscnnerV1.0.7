@@ -4,10 +4,10 @@
 
 // Old-AIzaSyCDEGN1ZXXVda9yhp2bHhpzT5yncr66CKY
 
-const GEMINI_API_KEY = "AIzaSyBUy2wc8uj5toeXenxC-FAzm3bfW-1CZ2E"; // <--- ⚠️ PASTE YOUR GEMINI API KEY HERE //AIzaSyCDEGN1ZXXVda9yhp2bHhpzT5yncr66CKY
+const GEMINI_API_KEY = "AIzaSyCg3D634H6VdFmSz95kPTouSAlL_7si5VA"; // <--- ⚠️ PASTE YOUR GEMINI API KEY HERE //AIzaSyCDEGN1ZXXVda9yhp2bHhpzT5yncr66CKY
                                         // AIzaSyCNAzq1NaHaY64bcaRo3x5lWj7qA53frPQ AIzaSyBAzQ-zI3DN1VWVPjkT8QGIRNA7X18kmJs
 
-const GOOGLE_CLOUD_API_KEY = "AIzaSyB6vMDEGyGedToco04XSGbE2HvdPl-HgLE"; // <--- ⚠️ PASTE YOUR GOOGLE CLOUD API KEY HERE
+const GOOGLE_CLOUD_API_KEY = "AIzaSyA8txBtoZO07MmqUuvmvygLzsANq6le820"; // <--- ⚠️ PASTE YOUR GOOGLE CLOUD API KEY HERE
 
 const GOOGLE_CLIENT_ID = '316419019852-4dum2avurto1fv23lm0mrehl6pa8k103.apps.googleusercontent.com'; // <--- ⚠️ PASTE YOUR NEW CLIENT ID HERE
 
