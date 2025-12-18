@@ -86,16 +86,22 @@ async function extractTextFromPdf(pdfData) {
 
 // --- 2. SEND TO BACKEND (APPS SCRIPT) ---
 getDataBtn.addEventListener('click', async () => {
+    // --- UPDATED INPUTS ---
     const billSource = document.getElementById('bill-source').value;
     const billGivenBy = document.getElementById('bill-given-by').value;
     const addedBy = document.getElementById('added-by').value;
-    
-    if (!billGivenBy || !addedBy) { showStatus('error', 'Please fill all manual fields.'); return; }
+    const invoiceReceivedDate = document.getElementById('invoice-received-date').value; // <--- NEW
+
+    // --- UPDATED VALIDATION ---
+    if (!billGivenBy || !addedBy || !invoiceReceivedDate) { 
+        showStatus('error', 'Please fill all manual fields including Date.'); 
+        return; 
+    }
 
     setLoading(true, "Fetching headers and processing with AI...");
 
     try {
-        // Step A: Get Headers (Optional, but good for alignment)
+        // Step A: Get Headers
         const headerRes = await fetch(APPS_SCRIPT_URL, {
             method: 'POST', body: JSON.stringify({ action: 'getHeaders' })
         });
@@ -120,6 +126,7 @@ getDataBtn.addEventListener('click', async () => {
             const finalDataObject = {
                 "Unique ID": uniqueId,
                 ...result.data,
+                "Invoice Received Date": invoiceReceivedDate, // <--- ADDED TO DATA
                 "Bill Source": billSource,
                 "Bill Given By": billGivenBy,
                 "Added By": addedBy,
@@ -186,7 +193,6 @@ window.submitFinalData = async (data) => {
     setLoading(true, "Uploading PDF and Saving to Sheets...");
     
     try {
-        // Convert PDF file to Base64
         const base64File = await fileToBase64(pdfFile);
         
         const payload = {
@@ -222,7 +228,7 @@ function fileToBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result.split(',')[1]); // Remove "data:application/pdf;base64," header
+        reader.onload = () => resolve(reader.result.split(',')[1]); 
         reader.onerror = error => reject(error);
     });
 }
@@ -249,4 +255,5 @@ function setLoading(isLoading, msg) {
 processNewBtn.onclick = () => {
     resetUIForNewBill();
     pdfUpload.value = "";
+    document.getElementById('invoice-received-date').value = ""; // Reset Date
 };
